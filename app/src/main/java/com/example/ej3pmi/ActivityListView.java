@@ -1,7 +1,11 @@
 package com.example.ej3pmi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ej3pmi.configuracion.SQLiteConexion;
 import com.example.ej3pmi.transacciones.Personas;
@@ -28,6 +33,8 @@ public class ActivityListView extends AppCompatActivity {
     Button btnActualizar;
     Button btnEliminar;
 
+    int id = 0;
+
 
 
     @Override
@@ -45,6 +52,26 @@ public class ActivityListView extends AppCompatActivity {
             }
         });
 
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityListView.this);
+                        builder.setMessage("¿Desea Eliminar esta Persona")
+                                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        EliminarPersona();
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                }).show();
+            }
+        });
+
         conexion = new SQLiteConexion(this, Transacciones.NameDatebase, null, 1);
         listView = (ListView) findViewById(R.id.listView);
 
@@ -57,6 +84,28 @@ public class ActivityListView extends AppCompatActivity {
     private void ActualizarPersona(){
 
     }
+
+
+
+    private void EliminarPersona(){
+        SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.NameDatebase, null, 1);
+        SQLiteDatabase db = conexion.getWritableDatabase();
+
+        try{
+            db.execSQL("DELETE FROM " + Transacciones.tablapersonas + " WHERE id = '" + id + "'");
+
+        } catch (Exception ex){
+            Toast.makeText(this, "Nose pudo Eliminar la Persona", Toast.LENGTH_LONG).show();
+
+        }finally {
+            db.close();
+        }
+
+    }
+
+
+    
+
 
     private void ObtenerListaPersonas(){
         SQLiteDatabase db = conexion.getReadableDatabase();

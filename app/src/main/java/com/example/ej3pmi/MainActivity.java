@@ -3,6 +3,7 @@ package com.example.ej3pmi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText nombres, apellidos, edad, correo, direccion;
 
     Button btnGuardar;
+    Button btnVer;
 
 
     @Override
@@ -33,11 +35,23 @@ public class MainActivity extends AppCompatActivity {
         direccion = (EditText) findViewById(R.id.direccion);
 
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
+        btnVer = (Button) findViewById(R.id.btnVer) ;
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AgregarPersona();
+            }
+        });
+
+        btnVer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getApplicationContext(),
+                        ActivityListView.class);
+                startActivity(intent);
+
             }
         });
     }

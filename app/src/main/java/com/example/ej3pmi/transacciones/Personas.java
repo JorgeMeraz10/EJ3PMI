@@ -18,6 +18,7 @@ public class Personas {
         this.direccion = direccion;
     }
 
+
     public Personas(){}
 
     public Integer getId() {

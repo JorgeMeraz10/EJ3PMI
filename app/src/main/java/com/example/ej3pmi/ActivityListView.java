@@ -3,6 +3,7 @@ package com.example.ej3pmi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Person;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import com.example.ej3pmi.transacciones.Personas;
 import com.example.ej3pmi.transacciones.Transacciones;
 
 import java.util.ArrayList;
+import com.example.ej3pmi.MainActivity;
 
 public class ActivityListView extends AppCompatActivity {
 
@@ -32,10 +34,9 @@ public class ActivityListView extends AppCompatActivity {
 
     Button btnActualizar;
     Button btnEliminar;
+    Button btnInsertar;
 
     int id = 0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,29 @@ public class ActivityListView extends AppCompatActivity {
 
         btnActualizar = (Button)  findViewById(R.id.btnActualizar);
         btnEliminar = (Button) findViewById(R.id.btnEliminar);
+        btnInsertar  = (Button)  findViewById(R.id.btnInsertar);
+
+
+        btnInsertar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActualizarPersona();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("nombres", Personas.getNombres());
+                intent.putExtra("apellidos", Personas.getApellidos());
+                intent.putExtra("edad", Personas.getEdad());
+                intent.putExtra("correo", Personas.getCorreo());
+                intent.putExtra("direccion", Personas.getDireccion());
+                getApplicationContext().startActivity(intent);
+
             }
         });
 

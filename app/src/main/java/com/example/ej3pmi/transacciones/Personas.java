@@ -3,11 +3,11 @@ package com.example.ej3pmi.transacciones;
 public class Personas {
 
     private Integer id;
-    private String nombres;
-    private String apellidos;
-    private Integer edad;
-    private String correo;
-    private String direccion;
+    private static String nombres;
+    private static String apellidos;
+    private static Integer edad;
+    private static String correo;
+    private static String direccion;
 
     public Personas(Integer id, String nombres, String apellidos, Integer edad, String correo, String direccion) {
         this.id = id;
@@ -28,7 +28,7 @@ public class Personas {
         this.id = id;
     }
 
-    public String getNombres() {
+    public static String getNombres() {
         return nombres;
     }
 
@@ -36,7 +36,7 @@ public class Personas {
         this.nombres = nombres;
     }
 
-    public String getApellidos() {
+    public static String getApellidos() {
         return apellidos;
     }
 
@@ -44,7 +44,7 @@ public class Personas {
         this.apellidos = apellidos;
     }
 
-    public Integer getEdad() {
+    public static Integer getEdad() {
         return edad;
     }
 
@@ -52,7 +52,7 @@ public class Personas {
         this.edad = edad;
     }
 
-    public String getCorreo() {
+    public static String getCorreo() {
         return correo;
     }
 
@@ -60,7 +60,7 @@ public class Personas {
         this.correo = correo;
     }
 
-    public String getDireccion() {
+    public static String getDireccion() {
         return direccion;
     }
 
